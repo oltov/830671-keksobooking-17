@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Михаил Болтов](https://up.htmlacademy.ru/javascript/17/user/830671).
-* Наставник: `Неизвестно`.
+* Наставник: [Старчиков Павел](https://htmlacademy.ru/profile/id921875).
 
 ---
 
