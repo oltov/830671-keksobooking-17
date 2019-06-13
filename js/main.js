@@ -30,3 +30,19 @@ var markers = makeAdvert();
 
 document.querySelector('.map').classList.remove('map--faded');
 
+var pinListElement = document.querySelector('.map__pins');
+var pinPointTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
+
+var renderMarker = function (pin) {
+  var pinElement = pinPointTemplate.cloneNode(true);
+  pinElement.querySelector('img').src = pin.autor.avatar;
+  pinElement.querySelector('img').alt = pin.offer.type;
+  pinElement.style = 'left: ' + pin.location.x + 'px;' + 'top: ' + pin.location.y + 'px';
+  return pinElement;
+};
+
+var fragment = document.createDocumentFragment();
+for (var i = 0; i < markers.length; i++) {
+  fragment.appendChild(renderMarker(markers[i]));
+}
+pinListElement.appendChild(fragment);
