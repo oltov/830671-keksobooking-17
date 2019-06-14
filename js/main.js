@@ -1,6 +1,5 @@
 'use strict';
 
-var numbersFileAvatars = ['01', '02', '03', '04', '05', '06', '07', '08'];
 var housingTypes = ['palace', 'flat', 'house', 'bungalo'];
 var locationPoints = function (min, max) {
   var point = Math.floor(min + Math.random() * (max + 1 - min));
@@ -9,10 +8,10 @@ var locationPoints = function (min, max) {
 
 var makeAdvert = function () {
   var adverts = [];
-  for (var i = 0; i < 8; i++) {
-    adverts[i] = {
+  for (var i = 1; i < 9; i++) {
+    adverts[i - 1] = {
       'autor': {
-        'avatar': 'img/avatars/user' + numbersFileAvatars[Math.floor(Math.random() * numbersFileAvatars.length)] + '.png'
+        'avatar': 'img/avatars/user0' + i + '.png'
       },
       'offer': {
         'type': housingTypes[Math.floor(Math.random() * housingTypes.length)]
