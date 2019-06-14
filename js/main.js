@@ -6,7 +6,7 @@ var locationPoints = function (min, max) {
   return point;
 };
 
-var makeAdvert = function () {
+var makeAdvert = function() {
   var adverts = [];
   for (var i = 1; i < 9; i++) {
     adverts.push({
