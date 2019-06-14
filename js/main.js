@@ -9,7 +9,7 @@ var locationPoints = function (min, max) {
 var makeAdvert = function () {
   var adverts = [];
   for (var i = 1; i < 9; i++) {
-    adverts[i - 1] = {
+    adverts.push({
       'autor': {
         'avatar': 'img/avatars/user0' + i + '.png'
       },
@@ -20,7 +20,7 @@ var makeAdvert = function () {
         'x': locationPoints(40, 1160),
         'y': locationPoints(130, 630)
       }
-    };
+    });
   }
   return adverts;
 };
