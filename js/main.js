@@ -1,5 +1,7 @@
 'use strict';
 
+var POSITION_X_PIN_MAIN = 31;
+var POSITION_Y_PIN_MAIN = 62;
 var housingTypes = ['palace', 'flat', 'house', 'bungalo'];
 var locationPoints = function (min, max) {
   var point = Math.floor(min + Math.random() * (max + 1 - min));
@@ -44,7 +46,7 @@ for (var i = 0; i < markers.length; i++) {
 }
 pinListElement.appendChild(fragment);
 
-// отключение элементов формы в неактивном состоянии страницы
+// функция отключение элементов формы в неактивном состоянии страницы
 var deactivateElementForm = function (element) {
   if (element.length > 1) {
     for (var i = 0; i < element.length; i++) {
@@ -54,7 +56,7 @@ var deactivateElementForm = function (element) {
     element[0].setAttribute('disabled', 'disabled');
   }
 };
-
+// функция включения элементов формы в неактивном состоянии страницы
 var activateElementForm = function (element) {
   if (element.length > 1) {
     for (var i = 0; i < element.length; i++) {
@@ -71,6 +73,7 @@ var elementsForm = document.querySelectorAll('.ad-form__element');
 var mapPinMain = document.querySelector('.map__pin--main');
 var inputForm = document.querySelector('.ad-form');
 var map = document.querySelector('.map');
+var inputAddress = document.querySelector('#address');
 
 var removeClass = function (tag, classOut) {
   tag.classList.remove(classOut);
@@ -81,7 +84,15 @@ var activationPage = function () {
   removeClass(inputForm, 'ad-form--disabled');
   activateElementForm(mapForm);
   activateElementForm(elementsForm);
+  activateElementForm(fieldsetHeaderForm);
 };
+
+var getСoordinatesForInput = function () {
+  var inputXY = inputAddress.getBoundingClientRect()
+  inputAddress.placeholder = (inputXY.left + POSITION_X_PIN_MAIN) + ', ' + (inputXY.top + POSITION_Y_PIN_MAIN);
+};
+
+getСoordinatesForInput();
 
 deactivateElementForm(fieldsetHeaderForm);
 
@@ -91,4 +102,8 @@ deactivateElementForm(elementsForm);
 
 mapPinMain.addEventListener('click', function () {
   activationPage();
+});
+
+mapPinMain.addEventListener('mouseup', function () {
+  getСoordinatesForInput();
 });
