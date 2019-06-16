@@ -27,8 +27,6 @@ var makeAdvert = function() {
 
 var markers = makeAdvert();
 
-// document.querySelector('.map').classList.remove('map--faded');
-
 var pinListElement = document.querySelector('.map__pins');
 var pinPointTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 
@@ -48,18 +46,49 @@ pinListElement.appendChild(fragment);
 
 // отключение элементов формы в неактивном состоянии страницы
 var deactivateElementForm = function (element) {
-  element.setAttribute('disabled', 'disabled');
+  if (element.length > 1) {
+    for (var i = 0; i < element.length; i++) {
+      element[i].setAttribute('disabled', 'disabled');
+    };
+  } else {
+    element[0].setAttribute('disabled', 'disabled');
+  }
 };
 
-var fieldsetHeaderForm = document.querySelector('.ad-form-header');
+var activateElementForm = function (element) {
+  if (element.length > 1) {
+    for (var i = 0; i < element.length; i++) {
+      element[i].removeAttribute('disabled', 'disabled');
+    };
+  } else {
+    element[0].removeAttribute('disabled', 'disabled');
+  }
+};
+
+var fieldsetHeaderForm = document.querySelectorAll('.ad-form-header');
+var mapForm = document.querySelectorAll('.map__filter');
+var elementsForm = document.querySelectorAll('.ad-form__element');
+var mapPinMain = document.querySelector('.map__pin--main');
+var inputForm = document.querySelector('.ad-form');
+var map = document.querySelector('.map');
+
+var removeClass = function (tag, classOut) {
+  tag.classList.remove(classOut);
+};
+// функция с логикой активации страницы
+var activationPage = function () {
+  removeClass(map, 'map--faded');
+  removeClass(inputForm, 'ad-form--disabled');
+  activateElementForm(mapForm);
+  activateElementForm(elementsForm);
+};
+
 deactivateElementForm(fieldsetHeaderForm);
 
-var mapForm = document.querySelectorAll('.map__filter');
-for (var i = 0; i < mapForm.length; i++) {
-  deactivateElementForm(mapForm[i]);
-};
+deactivateElementForm(mapForm);
 
-var elementsForm = document.querySelectorAll('.ad-form__element');
-for (var i = 0; i < elementsForm.length; i++) {
-  deactivateElementForm(elementsForm[i]);
-};
+deactivateElementForm(elementsForm);
+
+mapPinMain.addEventListener('click', function () {
+  activationPage();
+});
