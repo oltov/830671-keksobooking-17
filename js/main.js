@@ -8,7 +8,7 @@ var locationPoints = function (min, max) {
   return point;
 };
 
-var makeAdvert = function() {
+var makeAdvert = function () {
   var adverts = [];
   for (var i = 1; i < 9; i++) {
     adverts.push({
@@ -49,9 +49,10 @@ pinListElement.appendChild(fragment);
 // функция отключение элементов формы в неактивном состоянии страницы
 var deactivateElementForm = function (element) {
   if (element.length > 1) {
+    // eslint-disable-next-line no-shadow
     for (var i = 0; i < element.length; i++) {
       element[i].setAttribute('disabled', 'disabled');
-    };
+    }
   } else {
     element[0].setAttribute('disabled', 'disabled');
   }
@@ -59,9 +60,10 @@ var deactivateElementForm = function (element) {
 // функция включения элементов формы в неактивном состоянии страницы
 var activateElementForm = function (element) {
   if (element.length > 1) {
+    // eslint-disable-next-line no-shadow
     for (var i = 0; i < element.length; i++) {
       element[i].removeAttribute('disabled', 'disabled');
-    };
+    }
   } else {
     element[0].removeAttribute('disabled', 'disabled');
   }
@@ -88,7 +90,7 @@ var activationPage = function () {
 };
 
 var getСoordinatesForInput = function () {
-  var inputXY = inputAddress.getBoundingClientRect()
+  var inputXY = inputAddress.getBoundingClientRect();
   inputAddress.placeholder = (inputXY.left + POSITION_X_PIN_MAIN) + ', ' + (inputXY.top + POSITION_Y_PIN_MAIN);
 };
 
