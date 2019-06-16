@@ -27,7 +27,7 @@ var makeAdvert = function() {
 
 var markers = makeAdvert();
 
-document.querySelector('.map').classList.remove('map--faded');
+// document.querySelector('.map').classList.remove('map--faded');
 
 var pinListElement = document.querySelector('.map__pins');
 var pinPointTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
@@ -45,3 +45,11 @@ for (var i = 0; i < markers.length; i++) {
   fragment.appendChild(renderMarker(markers[i]));
 }
 pinListElement.appendChild(fragment);
+// отключение элементов формы в неактивном состоянии страницы
+var fieldsetHeaderForm = document.querySelector('.ad-form-header');
+fieldsetHeaderForm.setAttribute('disabled', 'disabled');
+
+var elementsForm = document.querySelectorAll('.ad-form__element');
+for (var i = 0; i < elementsForm.length; i++) {
+  elementsForm[i].setAttribute('disabled', 'disabled');
+};
