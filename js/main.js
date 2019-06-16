@@ -45,11 +45,21 @@ for (var i = 0; i < markers.length; i++) {
   fragment.appendChild(renderMarker(markers[i]));
 }
 pinListElement.appendChild(fragment);
+
 // отключение элементов формы в неактивном состоянии страницы
+var deactivateElementForm = function (element) {
+  element.setAttribute('disabled', 'disabled');
+};
+
 var fieldsetHeaderForm = document.querySelector('.ad-form-header');
-fieldsetHeaderForm.setAttribute('disabled', 'disabled');
+deactivateElementForm(fieldsetHeaderForm);
+
+var mapForm = document.querySelectorAll('.map__filter');
+for (var i = 0; i < mapForm.length; i++) {
+  deactivateElementForm(mapForm[i]);
+};
 
 var elementsForm = document.querySelectorAll('.ad-form__element');
 for (var i = 0; i < elementsForm.length; i++) {
-  elementsForm[i].setAttribute('disabled', 'disabled');
+  deactivateElementForm(elementsForm[i]);
 };
