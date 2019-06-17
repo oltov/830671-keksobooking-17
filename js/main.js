@@ -2,6 +2,11 @@
 
 var POSITION_X_PIN_MAIN = 31;
 var POSITION_Y_PIN_MAIN = 62;
+var body = document.querySelector('body');
+var main = document.querySelector('main');
+var map = main.querySelector('.map');
+var inputForm = main.querySelector('.ad-form');
+
 var housingTypes = ['palace', 'flat', 'house', 'bungalo'];
 var locationPoints = function (min, max) {
   var point = Math.floor(min + Math.random() * (max + 1 - min));
@@ -30,8 +35,8 @@ var makeAdvert = function () {
 
 var markers = makeAdvert();
 
-var pinListElement = document.querySelector('.map__pins');
-var pinPointTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
+var pinListElement = map.querySelector('.map__pins');
+var pinPointTemplate = body.querySelector('#pin').content.querySelector('.map__pin');
 
 var renderMarker = function (pin) {
   var pinElement = pinPointTemplate.cloneNode(true);
@@ -42,6 +47,7 @@ var renderMarker = function (pin) {
 };
 
 var fragment = document.createDocumentFragment();
+
 for (var i = 0; i < markers.length; i++) {
   fragment.appendChild(renderMarker(markers[i]));
 }
@@ -49,24 +55,22 @@ pinListElement.appendChild(fragment);
 
 // функция отключение элементов формы в неактивном состоянии страницы
 var deactivateElementForm = function (element) {
-  for (var i = 0; i < element.length; i++) {
-    element[i].setAttribute('disabled', 'disabled');
+  for (var z = 0; z < element.length; z++) {
+    element[z].setAttribute('disabled', 'disabled');
   }
 };
 // функция включения элементов формы в неактивном состоянии страницы
 var activateElementForm = function (element) {
-  for (var i = 0; i < element.length; i++) {
-    element[i].removeAttribute('disabled', 'disabled');
+  for (var z = 0; z < element.length; z++) {
+    element[z].removeAttribute('disabled', 'disabled');
   }
 };
 
-var fieldsetHeaderForm = document.querySelectorAll('.ad-form-header');
-var mapForm = document.querySelectorAll('.map__filter');
-var elementsForm = document.querySelectorAll('.ad-form__element');
-var mapPinMain = document.querySelector('.map__pin--main');
-var inputForm = document.querySelector('.ad-form');
-var map = document.querySelector('.map');
-var inputAddress = document.querySelector('#address');
+var fieldsetHeaderForm = inputForm.querySelectorAll('.ad-form-header');
+var mapForm = map.querySelectorAll('.map__filter');
+var elementsForm = inputForm.querySelectorAll('.ad-form__element');
+var mapPinMain = map.querySelector('.map__pin--main');
+var inputAddress = inputForm.querySelector('#address');
 
 var removeClass = function (tag, classOut) {
   tag.classList.remove(classOut);
@@ -93,10 +97,6 @@ deactivateElementForm(mapForm);
 
 deactivateElementForm(elementsForm);
 
-mapPinMain.addEventListener('click', function () {
-  activationPage();
-});
+mapPinMain.addEventListener('click', activationPage);
 
-mapPinMain.addEventListener('mouseup', function () {
-  getСoordinatesForInput();
-});
+mapPinMain.addEventListener('mouseup', getСoordinatesForInput);
