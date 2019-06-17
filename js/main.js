@@ -23,6 +23,7 @@ var makeAdvert = function () {
         'y': locationPoints(130, 630)
       }
     });
+
   }
   return adverts;
 };
@@ -48,24 +49,14 @@ pinListElement.appendChild(fragment);
 
 // функция отключение элементов формы в неактивном состоянии страницы
 var deactivateElementForm = function (element) {
-  if (element.length > 1) {
-    // eslint-disable-next-line no-shadow
-    for (var i = 0; i < element.length; i++) {
-      element[i].setAttribute('disabled', 'disabled');
-    }
-  } else {
-    element[0].setAttribute('disabled', 'disabled');
+  for (var i = 0; i < element.length; i++) {
+    element[i].setAttribute('disabled', 'disabled');
   }
 };
 // функция включения элементов формы в неактивном состоянии страницы
 var activateElementForm = function (element) {
-  if (element.length > 1) {
-    // eslint-disable-next-line no-shadow
-    for (var i = 0; i < element.length; i++) {
-      element[i].removeAttribute('disabled', 'disabled');
-    }
-  } else {
-    element[0].removeAttribute('disabled', 'disabled');
+  for (var i = 0; i < element.length; i++) {
+    element[i].removeAttribute('disabled', 'disabled');
   }
 };
 
