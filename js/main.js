@@ -128,10 +128,10 @@ mapPinMain.addEventListener('mousedown', function (evt) {
 
     var coordTop = function (posTop) {
       posTop = posTop.offsetTop;
-      if(posTop < 130) {
+      if (posTop < 130) {
         posTop = 130;
       }
-      if(posTop > 630) {
+      if (posTop > 630) {
         posTop = 630;
       }
       return posTop;
@@ -140,20 +140,18 @@ mapPinMain.addEventListener('mousedown', function (evt) {
     var coordLeft = function (posLeft) {
       var posCoords = main.getBoundingClientRect();
       posLeft = posLeft.offsetLeft;
-      if(posLeft < posCoords.left) {
+      if (posLeft < posCoords.left) {
         posLeft = posCoords.left;
       }
-      if(posLeft > posCoords.width - WIDTH_PIN_MAIN) {
+      if (posLeft > posCoords.width - WIDTH_PIN_MAIN) {
         posLeft = posCoords.width - WIDTH_PIN_MAIN;
       }
-      console.log(posCoords.right);
-
       return posLeft;
     };
 
     mapPinMain.style.top = (coordTop(mapPinMain) - shift.y) + 'px';
     mapPinMain.style.left = (coordLeft(mapPinMain) - shift.x) + 'px';
-};
+  };
 
   var onMouseUp = function (upEvt) {
     upEvt.preventDefault();
