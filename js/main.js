@@ -2,6 +2,7 @@
 
 var POSITION_X_PIN_MAIN = 31;
 var POSITION_Y_PIN_MAIN = 62;
+var WIDTH_PIN_MAIN = 65;
 var body = document.querySelector('body');
 var main = document.querySelector('main');
 var map = main.querySelector('.map');
@@ -59,7 +60,7 @@ var deactivateElementForm = function (element) {
     element[z].setAttribute('disabled', 'disabled');
   }
 };
-// функция включения элементов формы в неактивном состоянии страницы
+// функция включения элементов формы в активном состоянии страницы
 var activateElementForm = function (element) {
   for (var z = 0; z < element.length; z++) {
     element[z].removeAttribute('disabled', 'disabled');
@@ -85,7 +86,7 @@ var activationPage = function () {
 };
 
 var getСoordinatesForInput = function () {
-  var inputXY = inputAddress.getBoundingClientRect();
+  var inputXY = mapPinMain.getBoundingClientRect();
   inputAddress.placeholder = (inputXY.left + POSITION_X_PIN_MAIN) + ', ' + (inputXY.top + POSITION_Y_PIN_MAIN);
 };
 
@@ -97,6 +98,69 @@ deactivateElementForm(mapForm);
 
 deactivateElementForm(elementsForm);
 
-mapPinMain.addEventListener('click', activationPage);
+// mapPinMain.addEventListener('click', activationPage);
 
 mapPinMain.addEventListener('mouseup', getСoordinatesForInput);
+
+// реализация перетаскивания маркера и активации страницы
+
+mapPinMain.addEventListener('mousedown', function (evt) {
+  evt.preventDefault();
+  mapPinMain.style.position = 'absolute';
+  activationPage();
+  var startCoords = {
+    x: evt.clientX,
+    y: evt.clientY
+  };
+
+  var onMouseMove = function (moveEvt) {
+    moveEvt.preventDefault();
+    var shift = {
+      x: startCoords.x - moveEvt.clientX,
+      y: startCoords.y - moveEvt.clientY
+    };
+
+    startCoords = {
+      x: moveEvt.clientX,
+      y: moveEvt.clientY
+    };
+    getСoordinatesForInput();
+
+    var coordTop = function (posTop) {
+      posTop = posTop.offsetTop;
+      if(posTop < 130) {
+        posTop = 130;
+      }
+      if(posTop > 630) {
+        posTop = 630;
+      }
+      return posTop;
+    };
+
+    var coordLeft = function (posLeft) {
+      var posCoords = main.getBoundingClientRect();
+      posLeft = posLeft.offsetLeft;
+      if(posLeft < posCoords.left) {
+        posLeft = posCoords.left;
+      }
+      if(posLeft > posCoords.width - WIDTH_PIN_MAIN) {
+        posLeft = posCoords.width - WIDTH_PIN_MAIN;
+      }
+      console.log(posCoords.right);
+
+      return posLeft;
+    };
+
+    mapPinMain.style.top = (coordTop(mapPinMain) - shift.y) + 'px';
+    mapPinMain.style.left = (coordLeft(mapPinMain) - shift.x) + 'px';
+};
+
+  var onMouseUp = function (upEvt) {
+    upEvt.preventDefault();
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+  };
+
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup', onMouseUp);
+});
