@@ -137,8 +137,9 @@ mapPinMain.addEventListener('mousedown', function (evt) {
       return posTop;
     };
 
+    var posCoords = map.getBoundingClientRect();
+
     var coordLeft = function (posLeft) {
-      var posCoords = map.getBoundingClientRect();
       posLeft = posLeft.offsetLeft;
       if (posLeft <= 0) {
         posLeft = 0;
