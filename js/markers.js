@@ -20,7 +20,9 @@
     var errorMessage = main.querySelector('.error__message');
     var buttonError = main.querySelector('.error__button');
     errorMessage.textContent = message;
+
     // временное решение, эксперементировал, в задании написано просто показать шаблон
+
     buttonError.textContent = 'Перезагрузите страницу';
     buttonError.addEventListener('click', function () {
       window.location.reload();
