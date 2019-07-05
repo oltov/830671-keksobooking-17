@@ -1,24 +1,23 @@
 'use strict';
 
 (function () {
-  var body = document.querySelector('body');
-  var main = document.querySelector('main');
-  var map = main.querySelector('.map');
-
-  window.body = body;
-  window.main = main;
-  window.map = map;
-
-  var pinListElement = map.querySelector('.map__pins');
-  var pinPointTemplate = body.querySelector('#pin').content.querySelector('.map__pin');
-  var messageErrorTemplate = body.querySelector('#error').content.querySelector('.error');
-
+  var markers = [];
+  var messageErrorTemplate = window.body.querySelector('#error').content.querySelector('.error');
+  var selectHousingType = window.main.querySelector('#housing-type');
+  var typeHousing;
   var elementError = messageErrorTemplate.cloneNode(true);
 
+  var makeFilter = function () {
+    var filterHousingType = markers.filter(function (it) {
+      return it.offer.type === typeHousing;
+    });
+    window.render(filterHousingType);
+  };
+
   var onError = function (message) {
-    main.insertAdjacentElement('afterbegin', elementError);
-    var errorMessage = main.querySelector('.error__message');
-    var buttonError = main.querySelector('.error__button');
+    window.main.insertAdjacentElement('afterbegin', elementError);
+    var errorMessage = window.main.querySelector('.error__message');
+    var buttonError = window.main.querySelector('.error__button');
     errorMessage.textContent = message;
 
     // временное решение, эксперементировал, в задании написано просто показать шаблон
@@ -29,23 +28,22 @@
     });
   };
 
-  var renderMarker = function (pin) {
-    var pinElement = pinPointTemplate.cloneNode(true);
-    pinElement.querySelector('img').src = pin.author.avatar;
-    pinElement.querySelector('img').alt = pin.offer.type;
-    pinElement.style = 'left: ' + pin.location.x + 'px;' + 'top: ' + pin.location.y + 'px';
-    return pinElement;
-  };
+  selectHousingType.addEventListener('change', function () {
 
-  var fragment = document.createDocumentFragment();
+    for (var i = 0; i < selectHousingType.options.length; i++) {
+      var option = selectHousingType[i];
+      if (option.selected) {
+        typeHousing = option.value;
+
+        makeFilter();
+      }
+    }
+  });
 
   var successPin = function (pin) {
-    for (var i = 0; i < 8; i++) {
-      fragment.appendChild(renderMarker(pin[i]));
-    }
-    pinListElement.appendChild(fragment);
+    markers = pin;
+    window.render(pin);
   };
-  window.successPin = successPin;
 
   window.load(successPin, onError);
 
