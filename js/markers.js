@@ -11,6 +11,12 @@
     var filterHousingType = markers.filter(function (it) {
       return it.offer.type === typeHousing;
     });
+
+    var qwe = window.pinListElement.querySelectorAll('.map__pin');
+    for (var z = 1; z < qwe.length; z++) {
+      window.pinListElement.removeChild(qwe[z]);
+    }
+
     window.render(filterHousingType);
   };
 
@@ -34,7 +40,6 @@
       var option = selectHousingType[i];
       if (option.selected) {
         typeHousing = option.value;
-
         makeFilter();
       }
     }

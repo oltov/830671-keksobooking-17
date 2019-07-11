@@ -15,6 +15,7 @@
   window.pinListElement = pinListElement;
   window.fragment = fragment;
 
+
   var renderMarker = function (pin) {
     var pinElement = pinPointTemplate.cloneNode(true);
     pinElement.querySelector('img').src = pin.author.avatar;
