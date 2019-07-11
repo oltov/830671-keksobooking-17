@@ -15,8 +15,7 @@
     var qwe = window.pinListElement.querySelectorAll('.map__pin');
     for (var z = 1; z < qwe.length; z++) {
       window.pinListElement.removeChild(qwe[z]);
-      console.log(qwe);
-    };
+    }
 
     window.render(filterHousingType);
   };
