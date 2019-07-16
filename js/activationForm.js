@@ -1,6 +1,13 @@
 'use strict';
 
 (function () {
+  var body = document.querySelector('body');
+  var main = body.querySelector('main');
+  var map = main.querySelector('.map');
+  window.map = map;
+  window.body = body;
+  window.main = main;
+
   var POSITION_X_PIN_MAIN = 31;
   var POSITION_Y_PIN_MAIN = 62;
   var inputForm = window.main.querySelector('.ad-form');

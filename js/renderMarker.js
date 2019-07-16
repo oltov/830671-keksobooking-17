@@ -14,6 +14,11 @@
   var pinPointTemplate = window.body.querySelector('#pin').content.querySelector('.map__pin');
   window.pinListElement = pinListElement;
   window.fragment = fragment;
+  var filterElement = window.map.querySelector('.map__filters-container');
+  window.filterElement = filterElement;
+
+  var fragmentPopup = document.createDocumentFragment();
+  window.fragmentPopup = fragmentPopup;
 
   var renderMarker = function (pin) {
     var pinElement = pinPointTemplate.cloneNode(true);
@@ -28,6 +33,9 @@
 
     for (var i = 0; i < takeNumber; i++) {
       fragment.appendChild(renderMarker(pin[i]));
+      fragmentPopup.appendChild(window.renderPopup(window.markers[3]));
+      window.map.insertBefore(fragmentPopup, filterElement);
+
     }
     pinListElement.appendChild(fragment);
   };

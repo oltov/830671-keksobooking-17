@@ -47,6 +47,7 @@
 
   var successPin = function (pin) {
     markers = pin;
+    window.markers = pin;
     window.render(pin);
   };
 
