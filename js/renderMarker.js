@@ -30,12 +30,8 @@
 
   var render = function (pin) {
     var takeNumber = pin.length > 5 ? 5 : pin.length;
-
     for (var i = 0; i < takeNumber; i++) {
       fragment.appendChild(renderMarker(pin[i]));
-      fragmentPopup.appendChild(window.renderPopup(window.markers[3]));
-      window.map.insertBefore(fragmentPopup, filterElement);
-
     }
     pinListElement.appendChild(fragment);
   };

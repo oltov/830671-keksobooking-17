@@ -11,6 +11,7 @@
     var filterHousingType = markers.filter(function (it) {
       return it.offer.type === typeHousing;
     });
+    window.filterHousingType = filterHousingType;
 
     var qwe = window.pinListElement.querySelectorAll('.map__pin');
     for (var z = 1; z < qwe.length; z++) {
@@ -52,5 +53,35 @@
   };
 
   window.load(successPin, onError);
+
+  var popup;
+  var BUTTON = 'button';
+  var buttonCloseMap;
+
+  window.main.addEventListener('click', function (evt) {
+    var data = window.map.querySelectorAll('.map__pin');
+    console.log(data);
+    if (evt.target.parentElement.type === BUTTON) {
+      if (popup) {
+        return;
+      } else {
+        for (var i = 1; i < data.length; i++) {
+          if (evt.target.lastChild.currentSrc === data[i].lastChild.currentSrc) {
+            window.fragmentPopup.appendChild(window.renderPopup(markers[i]));
+            window.map.insertBefore(window.fragmentPopup, window.filterElement);
+            popup = window.map.querySelector('.map__card');
+            buttonCloseMap = window.map.querySelector('.popup__close');
+            // }
+            buttonCloseMap.addEventListener('click', function () {
+              window.map.removeChild(popup);
+              popup = null;
+            });
+          } // else {
+          //   return
+          // }
+        }
+      }
+    }
+  });
 
 })();
