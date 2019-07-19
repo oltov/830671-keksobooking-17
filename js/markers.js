@@ -59,14 +59,16 @@
   var buttonCloseMap;
 
   window.main.addEventListener('click', function (evt) {
-    var data = window.map.querySelectorAll('.map__pin');
-    console.log(data);
+    // var data = window.map.querySelectorAll('.map__pin');
+    console.log(evt.target);
+    console.log(evt);
+
     if (evt.target.parentElement.type === BUTTON) {
       if (popup) {
         return;
       } else {
-        for (var i = 1; i < data.length; i++) {
-          if (evt.target.lastChild.currentSrc === data[i].lastChild.currentSrc) {
+        for (var i = 0; i < markers.length; i++) {
+          if (evt.target.attributes[0].value === markers[i].author.avatar && evt.target.alt === markers[i].offer.type) {
             window.fragmentPopup.appendChild(window.renderPopup(markers[i]));
             window.map.insertBefore(window.fragmentPopup, window.filterElement);
             popup = window.map.querySelector('.map__card');
