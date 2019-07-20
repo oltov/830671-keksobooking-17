@@ -14,6 +14,11 @@
   var pinPointTemplate = window.body.querySelector('#pin').content.querySelector('.map__pin');
   window.pinListElement = pinListElement;
   window.fragment = fragment;
+  var filterElement = window.map.querySelector('.map__filters-container');
+  window.filterElement = filterElement;
+
+  var fragmentPopup = document.createDocumentFragment();
+  window.fragmentPopup = fragmentPopup;
 
   var renderMarker = function (pin) {
     var pinElement = pinPointTemplate.cloneNode(true);
@@ -25,7 +30,6 @@
 
   var render = function (pin) {
     var takeNumber = pin.length > 5 ? 5 : pin.length;
-
     for (var i = 0; i < takeNumber; i++) {
       fragment.appendChild(renderMarker(pin[i]));
     }

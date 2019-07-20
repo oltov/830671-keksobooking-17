@@ -6,11 +6,16 @@
   var selectHousingType = window.main.querySelector('#housing-type');
   var typeHousing;
   var elementError = messageErrorTemplate.cloneNode(true);
+  var popup;
+  var BUTTON = 'button';
+  var buttonCloseMap;
+  var ESC_KEYCODE = 27;
 
   var makeFilter = function () {
     var filterHousingType = markers.filter(function (it) {
       return it.offer.type === typeHousing;
     });
+    window.filterHousingType = filterHousingType;
 
     var qwe = window.pinListElement.querySelectorAll('.map__pin');
     for (var z = 1; z < qwe.length; z++) {
@@ -47,9 +52,44 @@
 
   var successPin = function (pin) {
     markers = pin;
+    window.markers = pin;
     window.render(pin);
   };
 
   window.load(successPin, onError);
+
+  var closePopup = function () {
+    window.map.removeChild(popup);
+    popup = null;
+  };
+
+  var onPopupEscPress = function (evt) {
+    if (evt.keyCode === ESC_KEYCODE) {
+      closePopup();
+    }
+  };
+
+  var openPopup = function (evt) {
+    for (var i = 0; i < markers.length; i++) {
+      if (evt.target.attributes[0].value === markers[i].author.avatar && evt.target.alt === markers[i].offer.type) {
+        window.fragmentPopup.appendChild(window.renderPopup(markers[i]));
+        window.map.insertBefore(window.fragmentPopup, window.filterElement);
+        popup = window.map.querySelector('.map__card');
+        buttonCloseMap = window.map.querySelector('.popup__close');
+      }
+    }
+  };
+
+  window.map.addEventListener('click', function (evt) {
+    if (evt.target.parentElement.type === BUTTON) {
+      if (popup) {
+        return;
+      } else {
+        openPopup(evt);
+        buttonCloseMap.addEventListener('click', closePopup);
+        document.addEventListener('keydown', onPopupEscPress);
+      }
+    }
+  });
 
 })();
