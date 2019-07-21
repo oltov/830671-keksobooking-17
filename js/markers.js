@@ -39,6 +39,8 @@
     });
   };
 
+  window.onError = onError;
+
   selectHousingType.addEventListener('change', function () {
 
     for (var i = 0; i < selectHousingType.options.length; i++) {
@@ -56,7 +58,7 @@
     window.render(pin);
   };
 
-  window.load(successPin, onError);
+  window.requestMethod.load(successPin, onError);
 
   var closePopup = function () {
     window.map.removeChild(popup);

@@ -42,7 +42,7 @@
 
   var getСoordinatesForInput = function () {
     var inputXY = window.mapPinMain.getBoundingClientRect();
-    inputAddress.placeholder = (inputXY.left + POSITION_X_PIN_MAIN) + ', ' + (inputXY.top + POSITION_Y_PIN_MAIN);
+    inputAddress.value = (inputXY.left + POSITION_X_PIN_MAIN) + ', ' + (inputXY.top + POSITION_Y_PIN_MAIN);
   };
 
   window.getСoordinatesForInput = getСoordinatesForInput;
