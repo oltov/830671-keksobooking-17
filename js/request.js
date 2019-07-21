@@ -16,6 +16,12 @@
       }
     });
 
+    XHR.addEventListener('load', function () {
+      if (XHR.status === 500) {
+        onError('Статус ответа: ' + XHR.status + ' ' + XHR.statusText);
+      }
+    });
+
     XHR.addEventListener('error', function () {
       onError('Произошла ошибка соединения');
     });

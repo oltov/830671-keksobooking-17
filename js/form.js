@@ -7,13 +7,10 @@
   var buttonSubmit = form.querySelector('.ad-form__submit');
 
   var checkCapacity = function () {
-    window.console.log(roomNumber.value);
-    window.console.log(roomCapacity.value);
 
     if (roomNumber.value === '1') {
       if (roomCapacity.value !== '1') {
         roomCapacity.setCustomValidity('Выберете колличество гостей 1');
-        window.console.log(roomNumber.value);
       } else {
         roomCapacity.setCustomValidity('');
       }
@@ -37,7 +34,7 @@
 
     if (roomNumber.value === '100') {
       if (roomCapacity.value !== '0') {
-        roomCapacity.setCustomValidity('В 100 комнатах живут только призраки');
+        roomCapacity.setCustomValidity('В 100 комнатах жить нельзя');
       } else {
         roomCapacity.setCustomValidity('');
       }
@@ -45,9 +42,26 @@
 
   };
 
-  buttonSubmit.addEventListener('click', function () {
-
+  buttonSubmit.addEventListener('click', function (evt) {
     checkCapacity();
+    zxc(evt);
   });
+
+  var zxc = function (evt) {
+    evt.preventDefault();
+    var qwe = new FormData(form);
+
+    var XHR = new XMLHttpRequest();
+    XHR.timeout = 10000;
+    XHR.responseType = 'json';
+    XHR.open('POST', 'https://js.dump.academy/keksobooking');
+    XHR.send(qwe);
+
+    XHR.addEventListener('load', function () {
+      if (XHR.status === 400) {
+        window.onError('Статус ответа: ' + XHR.status + ' ' + XHR.statusText);
+      }
+    });
+  };
 
 })();

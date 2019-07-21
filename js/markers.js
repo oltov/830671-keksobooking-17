@@ -39,6 +39,8 @@
     });
   };
 
+  window.onError = onError;
+
   selectHousingType.addEventListener('change', function () {
 
     for (var i = 0; i < selectHousingType.options.length; i++) {
