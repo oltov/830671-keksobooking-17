@@ -7,7 +7,6 @@
   var buttonSubmit = form.querySelector('.ad-form__submit');
 
   var checkCapacity = function () {
-
     if (roomNumber.value === '1') {
       if (roomCapacity.value !== '1') {
         roomCapacity.setCustomValidity('Выберете колличество гостей 1');
@@ -43,27 +42,13 @@
         return true;
       }
     }
-    return true;
-  };
-
-  var zxc = function () {
-    var qwe = new FormData(form);
-    var XHR = new XMLHttpRequest();
-    XHR.timeout = 10000;
-    XHR.responseType = 'json';
-    XHR.open('POST', 'https://js.dump.academy/keksobooking');
-    XHR.send(qwe);
-
-    XHR.addEventListener('load', function () {
-      if (XHR.status === 400) {
-        window.onError('Статус ответа: ' + XHR.status + ' ' + XHR.statusText);
-      }
-    });
+    return false;
   };
 
   buttonSubmit.addEventListener('click', function (evt) {
     if (checkCapacity()) {
-      zxc();
+      window.requestMethod.save(new FormData(form), window.onError);
+      // zxc();
       evt.preventDefault();
     }
   });

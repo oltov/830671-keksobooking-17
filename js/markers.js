@@ -58,7 +58,7 @@
     window.render(pin);
   };
 
-  window.load(successPin, onError);
+  window.requestMethod.load(successPin, onError);
 
   var closePopup = function () {
     window.map.removeChild(popup);
