@@ -13,6 +13,7 @@
         roomCapacity.setCustomValidity('Выберете колличество гостей 1');
       } else {
         roomCapacity.setCustomValidity('');
+        return true;
       }
     }
 
@@ -21,6 +22,7 @@
         roomCapacity.setCustomValidity('Выберете колличество гостей 1 или 2');
       } else {
         roomCapacity.setCustomValidity('');
+        return true;
       }
     }
 
@@ -29,6 +31,7 @@
         roomCapacity.setCustomValidity('Выберете колличество гостей 1, 2 или 3');
       } else {
         roomCapacity.setCustomValidity('');
+        return true;
       }
     }
 
@@ -37,20 +40,14 @@
         roomCapacity.setCustomValidity('В 100 комнатах жить нельзя');
       } else {
         roomCapacity.setCustomValidity('');
+        return true;
       }
     }
-
+    return true;
   };
 
-  buttonSubmit.addEventListener('click', function (evt) {
-    checkCapacity();
-    zxc(evt);
-  });
-
-  var zxc = function (evt) {
-    evt.preventDefault();
+  var zxc = function () {
     var qwe = new FormData(form);
-
     var XHR = new XMLHttpRequest();
     XHR.timeout = 10000;
     XHR.responseType = 'json';
@@ -64,4 +61,10 @@
     });
   };
 
+  buttonSubmit.addEventListener('click', function (evt) {
+    if (checkCapacity()) {
+      zxc();
+      evt.preventDefault();
+    }
+  });
 })();
