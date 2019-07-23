@@ -10,14 +10,6 @@
     XHR.responseType = 'json';
 
     XHR.addEventListener('load', function () {
-      if (XHR.status === 200) {
-        onLoad(XHR.response);
-      } else {
-        onError('Статус ответа: ' + XHR.status + ' ' + XHR.statusText);
-      }
-    });
-
-    XHR.addEventListener('load', function () {
       if (XHR.status === 400) {
         onError('Статус ответа: ' + XHR.status + ' ' + XHR.statusText);
       }
@@ -45,11 +37,24 @@
       var xhr = request(onLoad, onError);
       xhr.open('GET', URL_GET);
       xhr.send(data);
+      xhr.addEventListener('load', function () {
+        if (xhr.status === 200) {
+          onLoad(xhr.response);
+        } else {
+          onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
+        }
+      });
     },
-    save: function (data, onError, onLoad) {
-      var xhr = request(onLoad, onError);
+    save: function (data, onError) {
+      var xhr = request(onError);
       xhr.open('POST', URL_POST);
       xhr.send(data);
+      xhr.addEventListener('load', function () {
+        if (xhr.status === 200) {
+          window.deactivationPage();
+          window.onSuccess();
+        }
+      });
     }
   };
   window.requestMethod = requestMethod;
