@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+
   var markers = [];
   var messageErrorTemplate = window.body.querySelector('#error').content.querySelector('.error');
   var selectHousingType = window.main.querySelector('#housing-type');
@@ -10,20 +11,27 @@
   var BUTTON = 'button';
   var buttonCloseMap;
   var ESC_KEYCODE = 27;
-
+  window.ESC_KEYCODE = ESC_KEYCODE;
   var makeFilter = function () {
     var filterHousingType = markers.filter(function (it) {
       return it.offer.type === typeHousing;
     });
     window.filterHousingType = filterHousingType;
 
-    var qwe = window.pinListElement.querySelectorAll('.map__pin');
-    for (var z = 1; z < qwe.length; z++) {
-      window.pinListElement.removeChild(qwe[z]);
-    }
+    deletePins();
 
     window.render(filterHousingType);
   };
+
+  var deletePins = function () {
+    var pinsInHtml = window.pinListElement.querySelectorAll('.map__pin');
+    for (var z = 0; z < pinsInHtml.length; z++) {
+      if (pinsInHtml[z].type === 'button') {
+        window.pinListElement.removeChild(pinsInHtml[z]);
+      }
+    }
+  };
+  window.deletePins = deletePins;
 
   var onError = function (message) {
     window.main.insertAdjacentElement('afterbegin', elementError);
@@ -55,8 +63,9 @@
   var successPin = function (pin) {
     markers = pin;
     window.markers = pin;
-    window.render(pin);
+    // window.render(pin);
   };
+  window.successPin = successPin;
 
   window.requestMethod.load(successPin, onError);
 
