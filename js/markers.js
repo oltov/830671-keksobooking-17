@@ -4,24 +4,26 @@
 
   var markers = [];
   var messageErrorTemplate = window.body.querySelector('#error').content.querySelector('.error');
-  var selectHousingType = window.main.querySelector('#housing-type');
-  var typeHousing;
+  // var selectHousingType = window.main.querySelector('#housing-type');
+  // var typeHousing;
   var elementError = messageErrorTemplate.cloneNode(true);
   var popup;
   var BUTTON = 'button';
   var buttonCloseMap;
   var ESC_KEYCODE = 27;
   window.ESC_KEYCODE = ESC_KEYCODE;
-  var makeFilter = function () {
-    var filterHousingType = markers.filter(function (it) {
-      return it.offer.type === typeHousing;
-    });
-    window.filterHousingType = filterHousingType;
 
-    deletePins();
+  // var makeFilter = function () {
+  //   var filterHousingType = markers.filter(function (it) {
+  //     console.log(typeHousing);
+  //     return it.offer.type === typeHousing;
+  //   });
+  //   window.filterHousingType = filterHousingType;
 
-    window.render(filterHousingType);
-  };
+  //   deletePins();
+
+  //   window.render(filterHousingType);
+  // };
 
   var deletePins = function () {
     var pinsInHtml = window.pinListElement.querySelectorAll('.map__pin');
@@ -49,21 +51,21 @@
 
   window.onError = onError;
 
-  selectHousingType.addEventListener('change', function () {
+  // selectHousingType.addEventListener('change', function () {
 
-    for (var i = 0; i < selectHousingType.options.length; i++) {
-      var option = selectHousingType[i];
-      if (option.selected) {
-        typeHousing = option.value;
-        makeFilter();
-      }
-    }
-  });
+  //   for (var i = 0; i < selectHousingType.options.length; i++) {
+  //     var option = selectHousingType[i];
+  //     if (option.selected) {
+  //       console.log(option.value);
+  //       typeHousing = option.value;
+  //       makeFilter();
+  //     }
+  //   }
+  // });
 
   var successPin = function (pin) {
     markers = pin;
     window.markers = pin;
-    // window.render(pin);
   };
   window.successPin = successPin;
 
