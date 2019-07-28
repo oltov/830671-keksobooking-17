@@ -10,6 +10,51 @@
   window.formMapFilters = formMapFilters;
   var messageSuccessTemplate = window.body.querySelector('#success').content.querySelector('.success');
   var elemantSuccessMassage = messageSuccessTemplate.cloneNode(true);
+  var selectType = form.querySelector('#type');
+  var selectCost = form.querySelector('#price');
+  var selectTimeIn = form.querySelector('#timein');
+  var selectTimeOut = form.querySelector('#timeout');
+  var optionsTimeIn = selectTimeIn.querySelectorAll('option');
+  var optionsTimeOut = selectTimeOut.querySelectorAll('option');
+
+  var selectMinCost = function (type) {
+    switch (true) {
+      case type === 'bungalo':
+        selectCost.placeholder = 0;
+        selectCost.min = '0';
+        break;
+      case type === 'flat':
+        selectCost.placeholder = 1000;
+        selectCost.min = '1000';
+        break;
+      case type === 'house':
+        selectCost.placeholder = 5000;
+        selectCost.min = '5000';
+        break;
+      case type === 'palace':
+        selectCost.placeholder = 10000;
+        selectCost.min = '10000';
+    }
+  };
+
+  var selectTimeInterval = function (time, option) {
+    for (var i = 0; i < option.length; i++) {
+      if (time === option[i].value) {
+        option[i].selected = true;
+      }
+    }
+  };
+  selectType.addEventListener('change', function (evt) {
+    selectMinCost(evt.target.value);
+  });
+
+  selectTimeIn.addEventListener('change', function (evt) {
+    selectTimeInterval(evt.target.value, optionsTimeOut);
+  });
+
+  selectTimeOut.addEventListener('change', function (evt) {
+    selectTimeInterval(evt.target.value, optionsTimeIn);
+  });
 
   var onSuccess = function () {
     window.main.insertAdjacentElement('afterbegin', elemantSuccessMassage);
