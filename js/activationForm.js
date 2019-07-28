@@ -60,7 +60,6 @@
     var x = window.mapPinMain.offsetLeft;
     var y = window.mapPinMain.offsetTop;
 
-    // var inputXY = window.mapPinMain.getBoundingClientRect();
     inputAddress.value = (x + POSITION_X_PIN_MAIN) + ', ' + (y + POSITION_Y_PIN_MAIN);
   };
 
