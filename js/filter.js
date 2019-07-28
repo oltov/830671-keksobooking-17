@@ -49,6 +49,9 @@
   };
 
   window.formMapFilters.addEventListener('change', function () {
+    if (window.popup) {
+      window.closePopup();
+    }
     debounce(filteringSelectInput);
   });
 

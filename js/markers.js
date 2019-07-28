@@ -49,6 +49,7 @@
     window.map.removeChild(popup);
     popup = null;
   };
+  window.closePopup = closePopup;
 
   var onPopupEscPress = function (evt) {
     if (evt.keyCode === ESC_KEYCODE) {
@@ -63,6 +64,7 @@
         window.map.insertBefore(window.fragmentPopup, window.filterElement);
         popup = window.map.querySelector('.map__card');
         buttonCloseMap = window.map.querySelector('.popup__close');
+        window.popup = popup;
       }
     }
   };
