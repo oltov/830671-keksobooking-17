@@ -5,7 +5,7 @@
   var selectCost = window.main.querySelector('#housing-price');
   var selectRooms = window.main.querySelector('#housing-rooms');
   var selectGuests = window.main.querySelector('#housing-guests');
-  var selectCheckbox = window.formMapFilters.querySelector('.map__features');
+  var selectCheckbox = window.formMapFilters.querySelector('#housing-features');
 
   var transformingCost = function (cost) {
     switch (true) {

@@ -10,6 +10,7 @@
   var buttonCloseMap;
   var ESC_KEYCODE = 27;
   window.ESC_KEYCODE = ESC_KEYCODE;
+  window.popup = popup;
 
   var deletePins = function () {
     var pinsInHtml = window.pinListElement.querySelectorAll('.map__pin');
@@ -46,8 +47,8 @@
   window.requestMethod.load(successPin, onError);
 
   var closePopup = function () {
-    window.map.removeChild(popup);
-    popup = null;
+    window.map.removeChild(window.popup);
+    window.popup = null;
   };
   window.closePopup = closePopup;
 
@@ -62,22 +63,20 @@
       if (evt.target.attributes[0].value === markers[i].author.avatar && evt.target.alt === markers[i].offer.type) {
         window.fragmentPopup.appendChild(window.renderPopup(markers[i]));
         window.map.insertBefore(window.fragmentPopup, window.filterElement);
-        popup = window.map.querySelector('.map__card');
+        window.popup = window.map.querySelector('.map__card');
         buttonCloseMap = window.map.querySelector('.popup__close');
-        window.popup = popup;
       }
     }
   };
 
   window.map.addEventListener('click', function (evt) {
     if (evt.target.parentElement.type === BUTTON) {
-      if (popup) {
-        return;
-      } else {
-        openPopup(evt);
-        buttonCloseMap.addEventListener('click', closePopup);
-        document.addEventListener('keydown', onPopupEscPress);
+      if (window.popup) {
+        closePopup();
       }
+      openPopup(evt);
+      buttonCloseMap.addEventListener('click', closePopup);
+      document.addEventListener('keydown', onPopupEscPress);
     }
   });
 

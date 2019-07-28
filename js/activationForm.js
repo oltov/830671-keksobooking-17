@@ -36,7 +36,6 @@
   var deactivateElementForm = function (element) {
     for (var z = 0; z < element.length; z++) {
       element[z].setAttribute('disabled', 'disabled');
-      // element[z].value = '';
     }
   };
   window.deactivateElementForm = deactivateElementForm;
