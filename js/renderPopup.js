@@ -41,10 +41,10 @@
 
     var renderImg = function () {
       var fragmentImg = document.createDocumentFragment();
-      for (var qwe = 0; qwe < popup.offer.photos.length; qwe++) {
-        var asd = popupElement.querySelector('.popup__photo').cloneNode();
-        asd.src = popup.offer.photos[qwe];
-        fragmentImg.appendChild(asd);
+      for (var q = 0; q < popup.offer.photos.length; q++) {
+        var popupNode = popupElement.querySelector('.popup__photo').cloneNode();
+        popupNode.src = popup.offer.photos[q];
+        fragmentImg.appendChild(popupNode);
       }
       popupElement.querySelector('.popup__photos').innerHTML = '';
 
