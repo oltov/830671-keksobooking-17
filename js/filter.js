@@ -1,0 +1,65 @@
+'use strict';
+
+(function () {
+  var selectHousingType = window.main.querySelector('#housing-type');
+  var selectCost = window.main.querySelector('#housing-price');
+  var selectRooms = window.main.querySelector('#housing-rooms');
+  var selectGuests = window.main.querySelector('#housing-guests');
+  var selectCheckbox = window.formMapFilters.querySelector('.map__features');
+
+  var transformingCost = function (cost) {
+    switch (true) {
+      case cost < 10000:
+        return 'low';
+      case cost > 50000:
+        return 'high';
+      default:
+        return 'middle';
+    }
+  };
+
+  var filteringHouseType = function (select, option) {
+    return function (arr) {
+      return select.value !== 'any' ? arr.offer[option].toString() === select.value : true;
+    };
+  };
+
+  var filteringCost = function (arr) {
+    var z = transformingCost(arr.offer.price);
+    return selectCost.value !== 'any' ? selectCost.value === z : true;
+  };
+
+  var filterFeatures = function (arr) {
+    var check = selectCheckbox.querySelectorAll(':checked');
+    return Array.from(check).every(function (input) {
+      return arr.offer.features.indexOf(input.value) !== -1;
+    });
+  };
+
+  var filteringSelectInput = function () {
+    var filters = window.markers.slice();
+    filters = filters.filter(filterFeatures);
+    filters = filters.filter(filteringCost);
+    filters = filters.filter(filteringHouseType(selectHousingType, 'type'));
+    filters = filters.filter(filteringHouseType(selectRooms, 'rooms'));
+    filters = filters.filter(filteringHouseType(selectGuests, 'guests'));
+
+    window.deletePins();
+    window.render(filters);
+  };
+
+  window.formMapFilters.addEventListener('change', function () {
+    debounce(filteringSelectInput);
+  });
+
+  var debounce = function (arr) {
+    var lastTimeout;
+    if (lastTimeout) {
+      window.clearTimeout(lastTimeout);
+    }
+    lastTimeout = window.setTimeout(function () {
+      arr();
+    }, 500);
+  };
+
+})();
