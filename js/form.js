@@ -1,6 +1,12 @@
 'use strict';
 
 (function () {
+  var MinCost = {
+    bungalo: 0,
+    flat: 1000,
+    house: 5000,
+    palace: 10000
+  };
   var form = window.main.querySelector('.ad-form');
   var formMapFilters = window.map.querySelector('.map__filters');
   var roomNumber = form.querySelector('#room_number');
@@ -16,23 +22,24 @@
   var selectTimeOut = form.querySelector('#timeout');
   var optionsTimeIn = selectTimeIn.querySelectorAll('option');
   var optionsTimeOut = selectTimeOut.querySelectorAll('option');
+  var buttonReset = form.querySelector('.ad-form__reset');
 
   var selectMinCost = function (type) {
     switch (true) {
       case type === 'bungalo':
-        selectCost.placeholder = 0;
+        selectCost.placeholder = MinCost.bungalo;
         selectCost.min = '0';
         break;
       case type === 'flat':
-        selectCost.placeholder = 1000;
+        selectCost.placeholder = MinCost.flat;
         selectCost.min = '1000';
         break;
       case type === 'house':
-        selectCost.placeholder = 5000;
+        selectCost.placeholder = MinCost.house;
         selectCost.min = '5000';
         break;
       case type === 'palace':
-        selectCost.placeholder = 10000;
+        selectCost.placeholder = MinCost.palace;
         selectCost.min = '10000';
     }
   };
@@ -110,6 +117,11 @@
     }
     return false;
   };
+
+  buttonReset.addEventListener('click', function (evt) {
+    evt.preventDefault();
+    window.deactivationPage();
+  });
 
   buttonSubmit.addEventListener('click', function (evt) {
     if (checkCapacity()) {

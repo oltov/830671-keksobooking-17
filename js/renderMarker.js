@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  var MAX_NUMBER_ADVERTS = 5;
   var body = document.querySelector('body');
   var main = document.querySelector('main');
   var map = main.querySelector('.map');
@@ -29,7 +30,7 @@
   };
 
   var render = function (pin) {
-    var takeNumber = pin.length > 5 ? 5 : pin.length;
+    var takeNumber = pin.length > MAX_NUMBER_ADVERTS ? MAX_NUMBER_ADVERTS : pin.length;
     for (var i = 0; i < takeNumber; i++) {
       fragment.appendChild(renderMarker(pin[i]));
     }
