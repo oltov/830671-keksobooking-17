@@ -6,6 +6,12 @@
     x: 0,
     y: 0
   };
+
+  var Pos = {
+    ZERO: 0,
+    MIN: 130,
+    MAX: 630
+  };
   var removeClass = function (tag, classOut) {
     tag.classList.remove(classOut);
   };
@@ -67,11 +73,11 @@
 
     var coordTop = function (posTop) {
       posTop = posTop.offsetTop;
-      if (posTop < 130) {
-        posTop = 130;
+      if (posTop < Pos.MIN) {
+        posTop = Pos.MIN;
       }
-      if (posTop > 630) {
-        posTop = 630;
+      if (posTop > Pos.MAX) {
+        posTop = Pos.MAX;
       }
       return posTop;
     };
@@ -80,8 +86,8 @@
 
     var coordLeft = function (posLeft) {
       posLeft = posLeft.offsetLeft;
-      if (posLeft <= 0) {
-        posLeft = 0;
+      if (posLeft <= Pos.ZERO) {
+        posLeft = Pos.ZERO;
       }
       if (posLeft > posCoords.width - WIDTH_PIN_MAIN) {
         posLeft = posCoords.width - WIDTH_PIN_MAIN;

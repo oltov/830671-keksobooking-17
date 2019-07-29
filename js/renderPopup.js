@@ -10,7 +10,7 @@
     popupElement.querySelector('.popup__title').textContent = popup.offer.title;
     popupElement.querySelector('.popup__text--address').textContent = popup.offer.address;
     popupElement.querySelector('.popup__text--price').textContent = popup.offer.price + '₽' + '/ночь';
-    var typeUouse = function () {
+    var typeHouse = function () {
       var type = popupElement.querySelector('.popup__type');
       if (popup.offer.type === 'flat') {
         type.textContent = 'Кyвартира';
@@ -25,7 +25,7 @@
         type.textContent = 'Дворец';
       }
     };
-    typeUouse();
+    typeHouse();
     popupElement.querySelector('.popup__text--capacity').textContent = popup.offer.rooms + ' комнаты для ' + popup.offer.guests + ' гостей';
     popupElement.querySelector('.popup__text--time').textContent = 'Заезд после ' + popup.offer.checkin + ' выезд до ' + popup.offer.checkout;
     var features = function () {

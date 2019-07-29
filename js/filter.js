@@ -1,6 +1,11 @@
 'use strict';
 
 (function () {
+  var Cost = {
+    low: 10000,
+    high: 50000
+  };
+  var TIMEOUT = 500;
   var selectHousingType = window.main.querySelector('#housing-type');
   var selectCost = window.main.querySelector('#housing-price');
   var selectRooms = window.main.querySelector('#housing-rooms');
@@ -9,9 +14,9 @@
 
   var transformingCost = function (cost) {
     switch (true) {
-      case cost < 10000:
+      case cost < Cost.low:
         return 'low';
-      case cost > 50000:
+      case cost > Cost.high:
         return 'high';
       default:
         return 'middle';
@@ -62,7 +67,7 @@
     }
     lastTimeout = window.setTimeout(function () {
       arr();
-    }, 500);
+    }, TIMEOUT);
   };
 
 })();
