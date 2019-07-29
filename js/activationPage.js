@@ -42,6 +42,9 @@
     window.deactivateElementForm(window.fieldsetHeaderForm);
     window.deactivateElementForm(window.mapForm);
     window.deactivateElementForm(window.elementsForm);
+    if (window.popup) {
+      window.closePopup();
+    }
   };
 
   window.deactivationPage = deactivationPage;
