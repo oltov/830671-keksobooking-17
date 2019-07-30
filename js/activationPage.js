@@ -42,6 +42,7 @@
     window.deactivateElementForm(window.fieldsetHeaderForm);
     window.deactivateElementForm(window.mapForm);
     window.deactivateElementForm(window.elementsForm);
+    window.resetImg();
     if (window.popup) {
       window.closePopup();
     }
