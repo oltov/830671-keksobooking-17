@@ -7,7 +7,6 @@
     SERVER_ERROR: 500
   };
   var TIMIOUT_LOAD = 10000;
-  // var URL_GET = 'https://js.dump.academy/keksobooking/data';
   var URL_GET = 'json/data.json';
   var URL_POST = 'https://js.dump.academy/keksobooking';
   var request = function (onLoad, onError) {
